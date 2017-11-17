@@ -51,11 +51,38 @@ func ElizaResponse() {
 			fmt.Println("Why don’t you tell me more about your father?")
 		} else {
 
-			//match := regexp.MustCompile(`(?i)^(I am|I'm|im) ([^\.\?!]*)`)
 			match := regexp.MustCompile(`(?i)\bi am\b|\bI am\b|\bim\b|\bIm\b|\bI'm\b|\bi'm\b`)
 
 			if match.MatchString(userInput) {
-				fmt.Println("laaaaawd")
+
+				if strings.Contains(strings.ToLower(userInput), "your") {
+
+					test := regexp.MustCompile(`your`)
+
+					userInput = test.ReplaceAllString(userInput, "my")
+
+				}
+
+				if strings.Contains(strings.ToLower(userInput), "me") {
+
+					test1 := regexp.MustCompile(`me`)
+
+					userInput = test1.ReplaceAllString(userInput, "you")
+
+				}
+
+				if strings.Contains(strings.ToLower(userInput), "you") {
+
+					test2 := regexp.MustCompile(`you`)
+
+					userInput = test2.ReplaceAllString(userInput, "I")
+
+				}
+
+				res := match.ReplaceAllString(userInput, "How do you know you are")
+
+				fmt.Println(res + "?")
+
 			} else {
 
 				rand.Seed(time.Now().UTC().UnixNano())
